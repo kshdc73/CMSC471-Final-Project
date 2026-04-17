@@ -9,3 +9,8 @@ Feature: VPC Infrastructure
     Given the SAM template is initialized
     When the stack is deployed
     Then the AWS::EC2::Subnet resource must have CidrBlock '10.0.1.0/24'
+
+  Scenario: Verify Private Subnet CIDR Block
+    Given the SAM template is initialized
+    When the stack is deployed
+    Then the AWS::EC2::Subnet resource must have CidrBlock '10.0.2.0/24'
