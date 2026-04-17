@@ -11,6 +11,7 @@ Globals:
     Timeout: 3
 
 Resources:
+  #1. The main network container
   MyVPC:
     Type: AWS::EC2::VPC
     Properties:
@@ -20,3 +21,15 @@ Resources:
       Tags:
         - Key: Name
           Value: CMSC471-Final-VPC
+
+  #2. The Public "room" inside the network
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref MyVPC
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: !Select [ 0, !GetAZs '' ]
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: CMSC471-Public-Subnet
