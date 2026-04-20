@@ -20,3 +20,9 @@ Feature: VPC Infrastructure
     When the stack is deployed
     Then the AWS::EC2::Route resource must have DestinationCidrBlock '0.0.0.0/0'
     And the GatewayId must reference 'MyInternetGateway'
+  
+  Scenario: Verify Web Server Security Group Rules
+    Given the SAM template is initialized
+    When the stack is deployed
+    Then the AWS::EC2::SecurityGroup resource must have Ingress rules for port 80
+    And the AWS::EC2::SecurityGroup resource must have Ingress rules for port 22
