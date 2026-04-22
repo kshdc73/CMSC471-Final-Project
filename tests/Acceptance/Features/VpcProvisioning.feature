@@ -26,3 +26,4 @@ Feature: VPC Infrastructure
     When the stack is deployed
     Then the AWS::EC2::SecurityGroup resource must have Ingress rules for port 80
     And the AWS::EC2::SecurityGroup resource must have Ingress rules for port 22
+  
