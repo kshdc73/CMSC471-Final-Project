@@ -27,3 +27,10 @@ Feature: VPC Infrastructure
     Then the AWS::EC2::SecurityGroup resource must have Ingress rules for port 80
     And the AWS::EC2::SecurityGroup resource must have Ingress rules for port 22
   
+
+  Scenario: Verify Web Server Instance Configuration
+    Given the SAM template is initialized
+    When the stack is deployed
+    Then the AWS::EC2::Instance resource must exist
+    And the InstanceType must be 't2.micro'
+    And it must be associated with 'PublicSubnet'
