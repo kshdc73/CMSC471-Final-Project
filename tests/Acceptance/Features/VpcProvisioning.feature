@@ -34,3 +34,9 @@ Feature: VPC Infrastructure
     Then the AWS::EC2::Instance resource must exist
     And the InstanceType must be 't2.micro'
     And it must be associated with 'PublicSubnet'
+
+  Scenario: Verify Web Server Software Installation
+    Given the EC2 instance is provisioned
+    When the UserData script executes
+    Then the server should be listening on port 80
+    And the index.html file must contain 'IUP Bulletin Board'
