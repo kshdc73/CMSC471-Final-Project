@@ -110,6 +110,14 @@ Resources:
       InstanceType: t2.micro
       # Using a standard Amazon Linux 2 AMI (image)
       ImageId: ami-0c55b159cbfafe1f0
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          yum update -y
+          yum install -y httpd
+          systemctl start httpd
+          systemctl enable httpd
+          echo "<h1>Welcome to the IUP Bulletin Board</h1>" > /var/www/html/index.html
       NetworkInterfaces:
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
@@ -118,4 +126,5 @@ Resources:
           SubnetId: !Ref PublicSubnet
       Tags:
         - Key: Name
-          Value: BulletinBoard-Server  
+          Value: BulletinBoard-Server
+  
